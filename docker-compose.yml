@@ -1,0 +1,19 @@
+services:
+  expenses-tracker-db:
+    image: postgres
+    container_name: expenses-tracker-db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - PGDATA=/data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+volumes:
+  postgres:
+  pgadmin:
