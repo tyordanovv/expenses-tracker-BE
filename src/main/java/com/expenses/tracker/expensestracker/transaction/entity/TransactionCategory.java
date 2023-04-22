@@ -1,6 +1,6 @@
 package com.expenses.tracker.expensestracker.transaction.entity;
 
-public enum ExpenseCategory {
+public enum TransactionCategory {
     // Expense
     EXPENSE_GROCERY("Grocery"),
     EXPENSE_FOOD("Food"),
@@ -18,11 +18,17 @@ public enum ExpenseCategory {
     EXPENSE_PETS("Pets"),
     EXPENSE_HAIRCUTS("Haircuts"),
     EXPENSE_RENT("Rent"),
-    EXPENSE_OTHER("Other");
+    EXPENSE_OTHER("Other"),
+    //Income
+    INCOME_SALARY("Salary"),
+    INCOME_BONUS("Bonus"),
+    INCOME_DIVIDEND("Dividend"),
+    INCOME_OTHER("Other");
+
 
     private final String displayName;
 
-    ExpenseCategory(String displayName) {
+    TransactionCategory(String displayName) {
         this.displayName = displayName;
     }
 
