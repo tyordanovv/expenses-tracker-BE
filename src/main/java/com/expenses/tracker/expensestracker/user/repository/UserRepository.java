@@ -5,9 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Transactional
-@Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository
+        extends JpaRepository<User, Integer> {
     boolean existsCustomerByEmail(String email);
     boolean existsCustomerById(Integer id);
+    Optional<User> findCustomerByEmail(String email);
+
 }

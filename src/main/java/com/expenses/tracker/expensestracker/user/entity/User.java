@@ -3,18 +3,18 @@ package com.expenses.tracker.expensestracker.user.entity;
 import com.expenses.tracker.expensestracker.account.entity.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@NoArgsConstructor
 @Entity
 @Table(
         name = "users",
@@ -25,7 +25,13 @@ import java.util.Set;
                 )
         }
 )
-public class User implements UserDetails{
+@DiscriminatorColumn(
+        name = "user_type",
+        discriminatorType = DiscriminatorType.STRING
+)
+@NoArgsConstructor
+@Getter
+public class User implements Serializable, org.springframework.security.core.userdetails.UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -54,38 +60,52 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles;
+
     @OneToMany(mappedBy = "user")
     private Set<Account> accounts;
 
-    @OneToOne(
-            mappedBy = "user",
-            cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private com.expenses.tracker.expensestracker.user.entity.UserDetails userDetails;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RegistrationType registrationType;
 
     // Getters and Setters
     public Integer getId() {
         return id;
     }
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
     public String getFirstName(){return firstName;}
     public void setFirstName(String firstName){this.firstName = firstName;}
     public String getLastName(){return lastName;}
     public void setLastName(String lastName){this.lastName = lastName;}
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
     public LocalDate getLastLogin(){return this.last_login;}
     public void setLastLogin(LocalDate date){this.last_login = date;}
+    public RegistrationType getRegistrationType(){return this.registrationType;}
 
-    //TODO: add roles
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User customer = (User) o;
+        return Objects.equals(id, customer.id)
+                && Objects.equals(firstName, customer.firstName)
+                && Objects.equals(lastName, customer.lastName)
+                && Objects.equals(email, customer.email);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -100,33 +120,21 @@ public class User implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User customer = (User) o;
-        return Objects.equals(id, customer.id)
-                && Objects.equals(firstName, customer.firstName)
-                && Objects.equals(lastName, customer.lastName)
-                && Objects.equals(email, customer.email)
-                && Objects.equals(password, customer.password);
+        return this.enabled;
     }
 }
