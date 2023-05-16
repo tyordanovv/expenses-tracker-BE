@@ -48,10 +48,10 @@ public class User implements Serializable, org.springframework.security.core.use
     @Column(name = "last_login")
     private LocalDate last_login;
 
-    @Column(nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(nullable = false)
@@ -78,10 +78,7 @@ public class User implements Serializable, org.springframework.security.core.use
     private RegistrationType registrationType;
 
     // Getters and Setters
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {this.id = id;}
+    public Integer getId() {return id;}
     public String getFirstName(){return firstName;}
     public void setFirstName(String firstName){this.firstName = firstName;}
     public String getLastName(){return lastName;}

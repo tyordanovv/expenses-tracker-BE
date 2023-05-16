@@ -20,52 +20,52 @@ import java.util.List;
 @Service
 public class GoogleOAuth2Service {
 
-    private static final String APPLICATION_NAME = "My App";
-    private static final List<String> SCOPES = Arrays.asList(
-            "https://www.googleapis.com/auth/userinfo.email",
-            "https://www.googleapis.com/auth/userinfo.profile"
-    );
-
-    private final GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow;
-    private final JsonFactory jsonFactory;
-    private final HttpTransport httpTransport;
-
-    @Autowired
-    public GoogleOAuth2Service(GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow, JsonFactory jsonFactory, HttpTransport httpTransport) {
-        this.googleAuthorizationCodeFlow = googleAuthorizationCodeFlow;
-        this.jsonFactory = jsonFactory;
-        this.httpTransport = httpTransport;
-    }
-
-    public GoogleTokenResponse exchangeAuthorizationCode(String authorizationCode) throws IOException, TokenResponseException {
-        return googleAuthorizationCodeFlow.newTokenRequest(authorizationCode).execute();
-    }
-
-    public GoogleOAuth2User getUserInfo(String accessToken) throws IOException {
-        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
-        Oauth2 oauth2 = new Oauth2.Builder(httpTransport, jsonFactory, credential)
-                .setApplicationName(APPLICATION_NAME)
-                .build();
-        Userinfo userinfo = oauth2.userinfo().get().execute();
-        return new GoogleOAuth2User(userinfo.getId(), userinfo.getEmail(), userinfo.getGivenName(), userinfo.getFamilyName());
-    }
-
-    @Bean
-    public GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow(GoogleClientSecrets googleClientSecrets) throws IOException {
-        return new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, googleClientSecrets, SCOPES)
-                .setDataStoreFactory(new MemoryDataStoreFactory())
-                .setAccessType("offline")
-                .build();
-    }
-
-    @Bean
-    public JsonFactory jsonFactory() {
-        return GsonFactory.getDefaultInstance();
-    }
-
-    @Bean
-    public HttpTransport httpTransport() {
-        return new NetHttpTransport();
-    }
+//    private static final String APPLICATION_NAME = "My App";
+//    private static final List<String> SCOPES = Arrays.asList(
+//            "https://www.googleapis.com/auth/userinfo.email",
+//            "https://www.googleapis.com/auth/userinfo.profile"
+//    );
+//
+//    private final GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow;
+//    private final JsonFactory jsonFactory;
+//    private final HttpTransport httpTransport;
+//
+//    @Autowired
+//    public GoogleOAuth2Service(GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow, JsonFactory jsonFactory, HttpTransport httpTransport) {
+//        this.googleAuthorizationCodeFlow = googleAuthorizationCodeFlow;
+//        this.jsonFactory = jsonFactory;
+//        this.httpTransport = httpTransport;
+//    }
+//
+//    public GoogleTokenResponse exchangeAuthorizationCode(String authorizationCode) throws IOException, TokenResponseException {
+//        return googleAuthorizationCodeFlow.newTokenRequest(authorizationCode).execute();
+//    }
+//
+//    public GoogleOAuth2User getUserInfo(String accessToken) throws IOException {
+//        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+//        Oauth2 oauth2 = new Oauth2.Builder(httpTransport, jsonFactory, credential)
+//                .setApplicationName(APPLICATION_NAME)
+//                .build();
+//        Userinfo userinfo = oauth2.userinfo().get().execute();
+//        return new GoogleOAuth2User(userinfo.getId(), userinfo.getEmail(), userinfo.getGivenName(), userinfo.getFamilyName());
+//    }
+//
+//    @Bean
+//    public GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow(GoogleClientSecrets googleClientSecrets) throws IOException {
+//        return new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, googleClientSecrets, SCOPES)
+//                .setDataStoreFactory(new MemoryDataStoreFactory())
+//                .setAccessType("offline")
+//                .build();
+//    }
+//
+//    @Bean
+//    public JsonFactory jsonFactory() {
+//        return GsonFactory.getDefaultInstance();
+//    }
+//
+//    @Bean
+//    public HttpTransport httpTransport() {
+//        return new NetHttpTransport();
+//    }
 
 }

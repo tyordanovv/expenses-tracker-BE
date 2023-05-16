@@ -34,3 +34,11 @@ spring:
         provider:
           google:
             issuer-uri: "https://accounts.google.com"
+jwt:
+  secret: "secret"
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
+  allowed-headers: "*"
+  exposed-headers: "*"

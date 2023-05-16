@@ -10,8 +10,7 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository
         extends JpaRepository<User, Integer> {
-    boolean existsCustomerByEmail(String email);
-    boolean existsCustomerById(Integer id);
+    boolean existsUserByEmail(String email);
+    boolean existsUserById(Integer id);
     Optional<User> findCustomerByEmail(String email);
-
 }

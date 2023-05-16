@@ -2,11 +2,13 @@ package com.expenses.tracker.expensestracker.account.entity;
 
 import com.expenses.tracker.expensestracker.user.entity.User;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "accounts")
+@Getter
 public class Account {
     @Id
     private UUID uuid;
