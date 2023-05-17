@@ -1,6 +1,7 @@
 package com.expenses.tracker.expensestracker.user.dto;
 
 import com.expenses.tracker.expensestracker.account.entity.Account;
+import com.expenses.tracker.expensestracker.user.entity.Gender;
 import com.expenses.tracker.expensestracker.user.entity.RegistrationType;
 import com.expenses.tracker.expensestracker.user.entity.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;

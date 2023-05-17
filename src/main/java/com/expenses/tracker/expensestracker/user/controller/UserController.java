@@ -7,6 +7,7 @@ import com.expenses.tracker.expensestracker.user.entity.User;
 import com.expenses.tracker.expensestracker.user.service.UserService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("api/v1/user")
 @AllArgsConstructor
 public class UserController {
 
@@ -53,4 +54,9 @@ public class UserController {
 //
 //        return ResponseEntity.ok(token);
 //    }
+
+    @GetMapping()
+    public ResponseEntity<String> test(){
+        return ResponseEntity.ok("ok");
+    }
 }
