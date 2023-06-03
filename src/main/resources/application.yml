@@ -34,6 +34,17 @@ spring:
         provider:
           google:
             issuer-uri: "https://accounts.google.com"
+  mail:
+    host: smtp.mail2world.com
+    port: 587
+    username: budgit.test@mail2world.com
+    password: Tihomir123!
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 jwt:
   secret: "secret"
 
