@@ -1,25 +1,42 @@
 package com.expenses.tracker.expensestracker.user.service;
 
+import com.expenses.tracker.expensestracker.security.auth.AuthenticationRequest;
+import com.expenses.tracker.expensestracker.security.auth.RegistrationRequest;
 import com.expenses.tracker.expensestracker.user.dao.UserDao;
+import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
-import com.expenses.tracker.expensestracker.user.entity.User;
-import com.expenses.tracker.expensestracker.user.entity.UserDetails;
+import com.expenses.tracker.expensestracker.user.entity.*;
 import com.expenses.tracker.expensestracker.user.repository.UserDetailsRepository;
 import com.expenses.tracker.expensestracker.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Repository
 public class UserDataAccessService implements UserDao {
     private final UserRepository userRepository;
     private final UserDetailsRepository userDetailsRepository;
+    private final PasswordEncoder encoder;
+    private final UserDTOMapper userDTOMapper;
+
+    public UserDataAccessService(
+            UserRepository userRepository,
+            UserDetailsRepository userDetailsRepository,
+            PasswordEncoder encoder,
+            UserDTOMapper userDTOMapper
+            ) {
+        this.userRepository = userRepository;
+        this.userDetailsRepository = userDetailsRepository;
+        this.encoder = encoder;
+        this.userDTOMapper = userDTOMapper;
+    }
 
     @Override
     public List<User> selectAllUsers() {
@@ -51,8 +68,27 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public void insertUser(User customer) {
-        //TODO
+    public UserDTO insertUser(RegistrationRequest request) {
+        User user = new User(
+                request.firstName(),
+                request.lastName(),
+                request.email(),
+                encoder.encode(request.password()),
+                Collections.singleton(UserRole.FREE),
+                RegistrationType.DEFAULT
+        );
+
+        UserDetails userDetails = new UserDetails();
+        userDetails.setGender(Gender.valueOf(request.gender().toUpperCase()));
+        userDetails.setCountry(Country.valueOf(request.country().toUpperCase()));
+
+        user.setUserDetails(userDetails);
+        userDetails.setUser(user);
+
+        userRepository.save(user);
+        userDetailsRepository.save(userDetails);
+
+        return userDTOMapper.apply(user);
     }
 
     @Override

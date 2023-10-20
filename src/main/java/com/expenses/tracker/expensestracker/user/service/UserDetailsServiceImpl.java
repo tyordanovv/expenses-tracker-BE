@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserDao userDao;
+    private UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String email)

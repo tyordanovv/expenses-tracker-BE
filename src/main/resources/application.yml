@@ -35,7 +35,7 @@ spring:
           google:
             issuer-uri: "https://accounts.google.com"
 jwt:
-  secret: "secret"
+  secret: "#secret#secret#secret#secret#secret#secret#secret#secret#secret#"
 
 cors:
   allowed-origins: "*"

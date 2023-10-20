@@ -1,11 +1,9 @@
 package com.expenses.tracker.expensestracker.security.auth;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -17,7 +15,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("login")
+    @GetMapping()
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         AuthenticationResponse response = authenticationService.login(request);
         return ResponseEntity.ok()
@@ -25,4 +23,11 @@ public class AuthenticationController {
                 .body(response);
     }
 
+    @PostMapping()
+    public ResponseEntity<?> register(@RequestBody RegistrationRequest request){
+        AuthenticationResponse response = authenticationService.register(request);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, response.token())
+                .body(response);
+    }
 }

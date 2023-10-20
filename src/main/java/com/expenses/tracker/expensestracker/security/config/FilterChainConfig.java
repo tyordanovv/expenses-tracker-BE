@@ -42,13 +42,14 @@ public class FilterChainConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(                   // permit all request which match POST and the following urls
                         HttpMethod.POST,
-                        "/api/v1/auth/login",
-                        "/api/v1/auth/register",
+                        "/api/v1/auth",
                         "/api/v1/oauth2/callback"
                 ).permitAll()
                 .requestMatchers(                   // permit all request which match GET and /actuator/**
                         HttpMethod.GET,
-                        "/actuator/**"
+                        "/actuator/**",
+                        "/api/v1/auth",
+                        "/api/v1/user"
                 ).permitAll()
                 .requestMatchers(                   // permit all authenticated request to user controller
                         "/api/v1/user/**"

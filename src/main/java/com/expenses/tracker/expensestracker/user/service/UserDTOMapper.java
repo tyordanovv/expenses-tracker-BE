@@ -24,13 +24,15 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                         .stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet()),
-                extractAccountUUIDs(user),
-                user.getRegistrationType().toString()
+                extractAccountUUIDs(user)
         );
     }
 
     private Set<UUID> extractAccountUUIDs(User user) {
-        return user.getAccounts()
+        if (user.getAccounts() == null){
+            return null;
+        } else
+            return user.getAccounts()
                 .stream()
                 .map(Account::getUuid)
                 .collect(Collectors.toSet());

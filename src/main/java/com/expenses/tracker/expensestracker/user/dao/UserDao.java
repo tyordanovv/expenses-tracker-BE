@@ -1,5 +1,7 @@
 package com.expenses.tracker.expensestracker.user.dao;
 
+import com.expenses.tracker.expensestracker.security.auth.RegistrationRequest;
+import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
 import com.expenses.tracker.expensestracker.user.entity.User;
 
@@ -11,7 +13,7 @@ public interface UserDao {
     Optional<User> selectUserById(Integer customerId);
     Optional<User> selectUserByEmail(String email);
     UserDTOSummary selectUserSummaryById(Integer id);
-    void insertUser(User customer);
+    UserDTO insertUser(RegistrationRequest customer);
     boolean existsUserWithEmail(String email);
     void deleteUserById(Integer customerId);
     void updateUser(User update);

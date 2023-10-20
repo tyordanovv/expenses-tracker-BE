@@ -17,6 +17,9 @@ public class UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Column(name = "country")
+    @Enumerated(EnumType.STRING)
+    private Country country;
     @Column(name = "user_agreement")
     private String userAgreement;
     @Column(name = "user_requisition")
@@ -41,4 +44,5 @@ public class UserDetails {
     public void setUserAgreement(String userAgreement) {this.userAgreement = userAgreement;}
     public String getUserRequisition() {return userRequisition;}
     public void setUserRequisition(String userRequisition) {this.userRequisition = userRequisition;}
+    public void setCountry(Country country) {this.country = country;}
 }

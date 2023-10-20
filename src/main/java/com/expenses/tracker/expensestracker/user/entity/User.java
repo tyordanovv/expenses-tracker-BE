@@ -81,11 +81,37 @@ public class User implements Serializable, org.springframework.security.core.use
     public Integer getId() {return id;}
     public String getFirstName(){return firstName;}
     public void setFirstName(String firstName){this.firstName = firstName;}
+    public String getEmail(){return this.email;}
+    public void setEmail(String email){this.email = email;}
     public String getLastName(){return lastName;}
     public void setLastName(String lastName){this.lastName = lastName;}
     public LocalDate getLastLogin(){return this.last_login;}
     public void setLastLogin(LocalDate date){this.last_login = date;}
     public RegistrationType getRegistrationType(){return this.registrationType;}
+    public Set<UserRole> getRoles() {return roles;}
+    public void setRoles(Set<UserRole> roles) {this.roles = roles;}
+    public Set<Account> getAccounts() {return accounts;}
+    public void setAccounts(Set<Account> accounts) {this.accounts = accounts;}
+    public UserDetails getUserDetails() {return userDetails;}
+    public void setUserDetails(UserDetails userDetails) {this.userDetails = userDetails;}
+
+    public User(
+            String firstName,
+            String lastName,
+            String email,
+            String password,
+            Set<UserRole> roles,
+            RegistrationType registrationType
+    ) {
+        this.last_login = LocalDate.now();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.enabled = true;
+        this.registrationType = registrationType;
+    }
 
     @Override
     public boolean equals(Object o) {

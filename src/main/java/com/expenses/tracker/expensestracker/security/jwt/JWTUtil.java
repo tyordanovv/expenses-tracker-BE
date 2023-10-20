@@ -3,14 +3,12 @@ package com.expenses.tracker.expensestracker.security.jwt;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

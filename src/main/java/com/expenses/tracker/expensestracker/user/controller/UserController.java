@@ -1,32 +1,36 @@
 package com.expenses.tracker.expensestracker.user.controller;
 
 import com.expenses.tracker.expensestracker.security.google.GoogleOAuth2Service;
-import com.expenses.tracker.expensestracker.security.google.GoogleOAuth2User;
 import com.expenses.tracker.expensestracker.security.jwt.JWTUtil;
-import com.expenses.tracker.expensestracker.user.entity.User;
+import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
 import com.expenses.tracker.expensestracker.user.service.UserService;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("api/v1/user")
-@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
-    private final GoogleOAuth2Service googleOAuth2Service;
+//    private final GoogleOAuth2Service googleOAuth2Service;
     private final JWTUtil jwtUtil;
 
+    public UserController(UserService userService, GoogleOAuth2Service googleOAuth2Service, JWTUtil jwtUtil) {
+        this.userService = userService;
+//        this.googleOAuth2Service = googleOAuth2Service;
+        this.jwtUtil = jwtUtil;
+    }
+
+
+    @PostMapping()
+    public ResponseEntity<String> register(){
+        return ResponseEntity.ok("ok");
+    }
 //    @GetMapping("/oauth2/callback")
 //    public ResponseEntity<String> oauth2Callback(@RequestParam(name = "code") String authorizationCode) throws IOException {
 //        // Exchange authorization code for access token and refresh token

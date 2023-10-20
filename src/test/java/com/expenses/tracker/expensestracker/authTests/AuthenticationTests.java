@@ -45,9 +45,11 @@ public class AuthenticationTests {
         String lastName = "Yordanov";
         String email = lastName + "-" + firstName + "@gmail.com";
         String password = "password";
+        String country = "BG";
+        String gender = "MALE";
 
         RegistrationRequest customerRegistrationRequest = new RegistrationRequest(
-                firstName, lastName, email, password
+                firstName, lastName, email, password, country, gender
         );
 
         AuthenticationRequest authenticationRequest = new AuthenticationRequest(
