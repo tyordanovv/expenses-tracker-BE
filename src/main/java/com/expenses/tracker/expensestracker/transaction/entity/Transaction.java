@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 @Entity
 public class Transaction {
 
@@ -20,10 +20,7 @@ public class Transaction {
             strategy = GenerationType.SEQUENCE,
             generator = "transaction_id_seq")
     @Column(name = "transaction_id")
-    private Integer id;
-
-    @OneToOne(mappedBy = "transaction")
-    private SubscriptionTransaction subscriptionTransaction;
+    private Long id;
 
     @Column(nullable = false,
             name = "amount")

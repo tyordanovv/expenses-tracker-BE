@@ -1,14 +1,13 @@
 package com.expenses.tracker.expensestracker.user.service;
 
-import com.expenses.tracker.expensestracker.security.auth.AuthenticationRequest;
 import com.expenses.tracker.expensestracker.security.auth.RegistrationRequest;
 import com.expenses.tracker.expensestracker.user.dao.UserDao;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
 import com.expenses.tracker.expensestracker.user.entity.*;
+import com.expenses.tracker.expensestracker.user.mapper.UserDTOMapper;
 import com.expenses.tracker.expensestracker.user.repository.UserDetailsRepository;
 import com.expenses.tracker.expensestracker.user.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

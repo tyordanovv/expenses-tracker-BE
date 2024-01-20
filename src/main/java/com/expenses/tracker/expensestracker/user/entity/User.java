@@ -1,10 +1,12 @@
 package com.expenses.tracker.expensestracker.user.entity;
 
-import com.expenses.tracker.expensestracker.account.entity.Account;
+import com.expenses.tracker.expensestracker.account.entity.BankAccount;
+import com.expenses.tracker.expensestracker.account.entity.CashAccount;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -55,6 +57,7 @@ public class User implements Serializable, org.springframework.security.core.use
     private String lastName;
 
     @Column(nullable = false)
+    @Unique
     private String email;
 
     @Column(nullable = false)
@@ -65,7 +68,10 @@ public class User implements Serializable, org.springframework.security.core.use
     private Set<UserRole> roles;
 
     @OneToMany(mappedBy = "user")
-    private Set<Account> accounts;
+    private Set<CashAccount> cashAccounts;
+
+    @OneToMany(mappedBy = "user")
+    private Set<BankAccount> bankAccounts;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private com.expenses.tracker.expensestracker.user.entity.UserDetails userDetails;
@@ -78,21 +84,12 @@ public class User implements Serializable, org.springframework.security.core.use
     private RegistrationType registrationType;
 
     // Getters and Setters
-    public Integer getId() {return id;}
-    public String getFirstName(){return firstName;}
     public void setFirstName(String firstName){this.firstName = firstName;}
-    public String getEmail(){return this.email;}
     public void setEmail(String email){this.email = email;}
-    public String getLastName(){return lastName;}
     public void setLastName(String lastName){this.lastName = lastName;}
-    public LocalDate getLastLogin(){return this.last_login;}
     public void setLastLogin(LocalDate date){this.last_login = date;}
-    public RegistrationType getRegistrationType(){return this.registrationType;}
-    public Set<UserRole> getRoles() {return roles;}
     public void setRoles(Set<UserRole> roles) {this.roles = roles;}
-    public Set<Account> getAccounts() {return accounts;}
-    public void setAccounts(Set<Account> accounts) {this.accounts = accounts;}
-    public UserDetails getUserDetails() {return userDetails;}
+    public void setCashAccounts(Set<CashAccount> cashAccounts) {this.cashAccounts = cashAccounts;}
     public void setUserDetails(UserDetails userDetails) {this.userDetails = userDetails;}
 
     public User(

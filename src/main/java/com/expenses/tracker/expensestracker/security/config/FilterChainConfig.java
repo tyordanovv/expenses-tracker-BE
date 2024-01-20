@@ -49,7 +49,8 @@ public class FilterChainConfig {
                         HttpMethod.GET,
                         "/actuator/**",
                         "/api/v1/auth",
-                        "/api/v1/user"
+                        "/api/v1/user",
+                        "/api/v1/account/**"
                 ).permitAll()
                 .requestMatchers(                   // permit all authenticated request to user controller
                         "/api/v1/user/**"

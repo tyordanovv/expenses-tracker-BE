@@ -9,5 +9,7 @@ public record UserDTO(
         String lastName,
         String email,
         Set<String> roles,
-        Set<UUID> accounts
+        Set<UUID> cashAccounts,
+        Set<UUID> bankAccounts
+
 ) {}
