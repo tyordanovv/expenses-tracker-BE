@@ -1,4 +1,4 @@
-package com.expenses.tracker.expensestracker.security.auth;
+package com.expenses.tracker.expensestracker.user.auth;
 
 public record RegistrationRequest(
         String firstName,

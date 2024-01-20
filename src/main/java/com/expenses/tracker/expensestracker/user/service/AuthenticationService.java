@@ -1,10 +1,12 @@
-package com.expenses.tracker.expensestracker.security.auth;
+package com.expenses.tracker.expensestracker.user.service;
 
 import com.expenses.tracker.expensestracker.security.jwt.JWTUtil;
+import com.expenses.tracker.expensestracker.user.auth.AuthenticationRequest;
+import com.expenses.tracker.expensestracker.user.response.AuthenticationResponse;
+import com.expenses.tracker.expensestracker.user.auth.RegistrationRequest;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.entity.User;
 import com.expenses.tracker.expensestracker.user.mapper.UserDTOMapper;
-import com.expenses.tracker.expensestracker.user.service.UserDataAccessService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

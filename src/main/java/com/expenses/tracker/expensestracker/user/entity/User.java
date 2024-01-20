@@ -44,7 +44,7 @@ public class User implements Serializable, org.springframework.security.core.use
             strategy = GenerationType.SEQUENCE,
             generator = "user_id_seq")
     @Column(name = "user_id")
-    private Integer id;
+    private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "last_login")

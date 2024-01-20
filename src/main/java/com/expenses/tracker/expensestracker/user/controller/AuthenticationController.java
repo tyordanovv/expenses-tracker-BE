@@ -1,6 +1,9 @@
-package com.expenses.tracker.expensestracker.security.auth;
+package com.expenses.tracker.expensestracker.user.controller;
 
-import lombok.AllArgsConstructor;
+import com.expenses.tracker.expensestracker.user.auth.AuthenticationRequest;
+import com.expenses.tracker.expensestracker.user.auth.RegistrationRequest;
+import com.expenses.tracker.expensestracker.user.response.AuthenticationResponse;
+import com.expenses.tracker.expensestracker.user.service.AuthenticationService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

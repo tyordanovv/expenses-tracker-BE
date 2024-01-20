@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 public class TransactionDetails {
     @Id
     private Integer id;
-
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Transaction transaction;

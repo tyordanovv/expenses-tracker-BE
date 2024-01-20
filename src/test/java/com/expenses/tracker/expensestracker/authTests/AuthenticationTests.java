@@ -1,13 +1,10 @@
 package com.expenses.tracker.expensestracker.authTests;
 
-import com.expenses.tracker.expensestracker.security.auth.AuthenticationRequest;
-import com.expenses.tracker.expensestracker.security.auth.AuthenticationResponse;
-import com.expenses.tracker.expensestracker.security.auth.RegistrationRequest;
+import com.expenses.tracker.expensestracker.user.auth.AuthenticationRequest;
+import com.expenses.tracker.expensestracker.user.response.AuthenticationResponse;
+import com.expenses.tracker.expensestracker.user.auth.RegistrationRequest;
 import com.expenses.tracker.expensestracker.security.jwt.JWTUtil;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
-import com.expenses.tracker.expensestracker.user.entity.Gender;
-import com.github.javafaker.Faker;
-import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +17,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;

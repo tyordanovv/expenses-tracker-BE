@@ -1,4 +1,4 @@
-package com.expenses.tracker.expensestracker.security.auth;
+package com.expenses.tracker.expensestracker.user.response;
 
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 

@@ -1,6 +1,6 @@
 package com.expenses.tracker.expensestracker.user.dao;
 
-import com.expenses.tracker.expensestracker.security.auth.RegistrationRequest;
+import com.expenses.tracker.expensestracker.user.auth.RegistrationRequest;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
 import com.expenses.tracker.expensestracker.user.entity.User;
