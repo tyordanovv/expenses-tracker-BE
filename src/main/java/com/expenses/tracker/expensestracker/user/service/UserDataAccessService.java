@@ -1,7 +1,7 @@
 package com.expenses.tracker.expensestracker.user.service;
 
 import com.expenses.tracker.expensestracker.user.auth.RegistrationRequest;
-import com.expenses.tracker.expensestracker.user.dao.UserDao;
+import com.expenses.tracker.expensestracker.user.repository.UserDao;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.dto.UserDTOSummary;
 import com.expenses.tracker.expensestracker.user.entity.*;
@@ -44,7 +44,7 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public Optional<User> selectUserById(Integer customerId) {
+    public Optional<User> selectUserById(Long customerId) {
         return userRepository.findById(customerId);
     }
 
@@ -54,7 +54,7 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public UserDTOSummary selectUserSummaryById(Integer id) {
+    public UserDTOSummary selectUserSummaryById(Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException(
                         "User with id " + id +" was not found!"
@@ -96,7 +96,7 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public void deleteUserById(Integer customerId) {
+    public void deleteUserById(Long customerId) {
         userRepository.deleteById(customerId);
     }
 

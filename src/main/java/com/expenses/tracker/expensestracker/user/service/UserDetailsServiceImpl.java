@@ -1,9 +1,7 @@
 package com.expenses.tracker.expensestracker.user.service;
 
-import com.expenses.tracker.expensestracker.user.dao.UserDao;
-import com.expenses.tracker.expensestracker.user.repository.UserRepository;
+import com.expenses.tracker.expensestracker.user.repository.UserDao;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
