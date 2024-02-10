@@ -1,7 +1,6 @@
 package com.expenses.tracker.expensestracker.user.entity;
 
-import com.expenses.tracker.expensestracker.account.entity.BankAccount;
-import com.expenses.tracker.expensestracker.account.entity.CashAccount;
+import com.expenses.tracker.expensestracker.account.entity.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -66,14 +65,16 @@ public class User implements Serializable, org.springframework.security.core.use
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
-
-    @OneToMany(mappedBy = "user")
-    private Set<CashAccount> cashAccounts;
-
-    @OneToMany(mappedBy = "user")
-    private Set<BankAccount> bankAccounts;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY
+    )
+    private Set<Account> accounts;
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private com.expenses.tracker.expensestracker.user.entity.UserDetails userDetails;
 
     @Column(name = "enabled")
@@ -89,7 +90,6 @@ public class User implements Serializable, org.springframework.security.core.use
     public void setLastName(String lastName){this.lastName = lastName;}
     public void setLastLogin(LocalDate date){this.last_login = date;}
     public void setRoles(Set<UserRole> roles) {this.roles = roles;}
-    public void setCashAccounts(Set<CashAccount> cashAccounts) {this.cashAccounts = cashAccounts;}
     public void setUserDetails(UserDetails userDetails) {this.userDetails = userDetails;}
 
     public User(
@@ -140,17 +140,17 @@ public class User implements Serializable, org.springframework.security.core.use
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

@@ -1,10 +1,9 @@
 package com.expenses.tracker.expensestracker.transaction.entity;
 
 import com.expenses.tracker.expensestracker.account.entity.Account;
-import com.expenses.tracker.expensestracker.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
 public class Transaction {
 
     @Id
@@ -42,4 +41,27 @@ public class Transaction {
     @Column(name = "transaction_category")
     @Enumerated(EnumType.STRING)
     private TransactionCategory transactionCategory;
+    @Column(name = "transaction_type")
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
+    @Column(name = "logo_url")
+    private String logoURL;
+    @Column(name = "note")
+    private String note;
+
+    public Transaction(
+            double amount,
+            String currency,
+            LocalDate date,
+            Account account,
+            TransactionCategory category,
+            String note
+    ) {
+        this.amount = amount;
+        this.currency = currency;
+        this.date = date;
+        this.account = account;
+        this.transactionCategory = category;
+        this.note = note;
+    }
 }

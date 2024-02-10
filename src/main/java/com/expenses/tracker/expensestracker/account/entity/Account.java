@@ -4,12 +4,15 @@ import com.expenses.tracker.expensestracker.transaction.entity.Transaction;
 import com.expenses.tracker.expensestracker.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 import java.util.UUID;
 
-@MappedSuperclass
+@Entity
+@Table(name = "account")
 @Getter
+@NoArgsConstructor
 public class Account {
     @Id
     @SequenceGenerator(
@@ -21,11 +24,30 @@ public class Account {
             generator = "account_id_seq")
     @Column(name = "account_id")
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user;
+    protected User user;
     @Column(name = "account_name")
-    private String name;
-    @OneToMany(mappedBy = "transaction")
-    private Set<Transaction> transactions;
+    protected String name;
+    @OneToMany(
+            mappedBy = "account",
+            fetch = FetchType.LAZY
+    )
+    protected Set<Transaction> transactions;
+    @Column(name = "amount")
+    private double amount;
+    @Column(name = "account_type")
+    private AccountType accountType;
+
+    public Account(
+        User user,
+        String name,
+        double amount,
+        AccountType accountType
+    ){
+        this.user = user;
+        this.name = name;
+        this.amount = amount;
+        this.accountType = accountType;
+    }
 }

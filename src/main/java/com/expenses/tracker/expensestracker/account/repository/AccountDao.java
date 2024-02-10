@@ -1,12 +1,15 @@
 package com.expenses.tracker.expensestracker.account.repository;
 
+import com.expenses.tracker.expensestracker.account.entity.Account;
+import com.expenses.tracker.expensestracker.account.entity.AccountDTO;
+
 import java.util.Optional;
 import java.util.Set;
 
-public interface AccountDao<T> {
-    Optional<T> get(Long account_id);
-    Set<T> getAll(Long user_id);
-    Long save(T account);
-    void update(T account);
-    void delete(T account);
+public interface AccountDao {
+    Optional<Account> get(Long account_id);
+    Set<AccountDTO> getAll(Long user_id);
+    Long save(Account account);
+    void update(Account account);
+    void delete(Account account);
 }

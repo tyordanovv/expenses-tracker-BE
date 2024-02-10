@@ -39,7 +39,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            log.error("Error in authentication header caused fail! authHeader = {}" + authHeader);
+            log.error("Error in authentication header caused fail! authHeader = " + authHeader);
             filterChain.doFilter(request, response);
             return;
         }
@@ -59,14 +59,14 @@ public class JWTAuthFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                log.info("Successfully authenticated user: {}"
+                log.info("Successfully authenticated user: "
                         + SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
             } else {
-                log.error("Error in JWTToken caused fail! jwtToken = {}" + jwtToken);
+                log.error("Error in JWTToken caused fail! jwtToken = " + jwtToken);
             }
         } else {
-            log.error("Error in Security context holder caused fail! subject = {}, context authentication = {}"
-                    + subject, SecurityContextHolder.getContext().getAuthentication().toString());
+            log.error("Error in Security context holder caused fail! subject = " + subject + ", context authentication = "
+                    + SecurityContextHolder.getContext().getAuthentication().toString());
         }
         filterChain.doFilter(request, response);
     }

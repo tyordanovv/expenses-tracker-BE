@@ -18,7 +18,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping()
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         AuthenticationResponse response = authenticationService.login(request);
         return ResponseEntity.ok()
@@ -26,7 +26,7 @@ public class AuthenticationController {
                 .body(response);
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegistrationRequest request){
         AuthenticationResponse response = authenticationService.register(request);
         return ResponseEntity.ok()

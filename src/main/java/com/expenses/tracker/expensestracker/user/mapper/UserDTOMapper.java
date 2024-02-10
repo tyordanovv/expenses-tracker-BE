@@ -1,15 +1,12 @@
 package com.expenses.tracker.expensestracker.user.mapper;
 
 import com.expenses.tracker.expensestracker.account.entity.Account;
-import com.expenses.tracker.expensestracker.account.entity.BankAccount;
-import com.expenses.tracker.expensestracker.account.entity.CashAccount;
 import com.expenses.tracker.expensestracker.user.dto.UserDTO;
 import com.expenses.tracker.expensestracker.user.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,28 +23,18 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                         .stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet()),
-                extractCashAccountUUIDs(user),
-                extractBankAccountUUIDs(user)
+                extractAccountIDs(user)
         );
     }
 
-    private Set<UUID> extractCashAccountUUIDs(User user) {
-        if (user.getCashAccounts() == null){
+    private Set<Long> extractAccountIDs(User user) {
+        if (user.getAccounts() == null){
             return null;
         } else
-            return user.getCashAccounts()
+            return user.getAccounts()
                 .stream()
-                .map(CashAccount::getUuid)
+                .map(Account::getId)
                 .collect(Collectors.toSet());
     }
 
-    private Set<UUID> extractBankAccountUUIDs(User user) {
-        if (user.getBankAccounts() == null){
-            return null;
-        } else
-            return user.getBankAccounts()
-                    .stream()
-                    .map(BankAccount::getUuid)
-                    .collect(Collectors.toSet());
-    }
 }

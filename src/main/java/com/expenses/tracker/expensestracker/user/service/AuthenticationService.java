@@ -52,6 +52,7 @@ public class AuthenticationService {
         UserDTO userDTO = userDataAccessService.insertUser(request);
 
         if (userDTO != null) {
+            // TODO add cash account on registration
             String token = jwtUtil.issueToken(userDTO.email(), userDTO.roles());
             return new AuthenticationResponse(token, userDTO);
         }

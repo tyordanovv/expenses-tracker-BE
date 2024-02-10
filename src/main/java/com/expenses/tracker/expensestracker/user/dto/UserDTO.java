@@ -4,12 +4,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public record UserDTO(
-        Integer id,
+        Long id,
         String firstName,
         String lastName,
         String email,
         Set<String> roles,
-        Set<UUID> cashAccounts,
-        Set<UUID> bankAccounts
-
+        Set<Long> accounts
 ) {}

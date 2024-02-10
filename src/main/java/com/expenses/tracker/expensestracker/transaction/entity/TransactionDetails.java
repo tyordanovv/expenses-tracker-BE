@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table
 public class TransactionDetails {
     @Id
-    private Integer id;
+    private Long id;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Transaction transaction;

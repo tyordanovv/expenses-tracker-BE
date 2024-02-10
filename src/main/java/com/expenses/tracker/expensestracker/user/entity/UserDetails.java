@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDetails {
     @Id
-    private Integer id;
+    private Long id;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
